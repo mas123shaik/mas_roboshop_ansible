@@ -2,7 +2,7 @@
 Description = Cart Service
 [Service]
 User=roboshop
-{% for item in component_secrets|dict2item %}
+{% for item in component_secrets|dict2items %}
      Environment={{ item.key }}={{ item.value }}
 {% endfor %}
 
