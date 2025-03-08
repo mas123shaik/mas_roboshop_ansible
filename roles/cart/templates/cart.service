@@ -2,8 +2,8 @@
 Description = Cart Service
 [Service]
 User=roboshop
-{% for item in systemd_service_variables %}
-     Environment={{ item }}="{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/{{component_name}}:{{ item }} token={{ vault_token }} url=http://vault-internal.masdevops.online:8200') }}"
+{% for item in component_secrets|dict2item %}
+     Environment={{ item.key }}={{ item.value }}
 {% endfor %}
 
 ExecStart=/bin/node /app/server.js
